@@ -9,10 +9,22 @@
  */
 namespace Mission.Shared.Classes
 {
-	public class EditorVariables
+	public class EditorPlayers
 	{
+		public constructor {
+			_self.RescueChopperPilot = dre_rescueChopperPilot;
+		};
+	
+		public property Object RescueChopperPilot { get; private set; };
+	};
+
+	public class EditorVariables
+	{	
 		// Creates a EditorVariables object.
 		public constructor {
+			// Players
+			_self.Players = new EditorPlayers;
+		
 			// Extraction zones
 			_self.ExtractionZoneNorthMarker = "dre_northExtractionZoneMarker";
 			_self.ExtractionZoneEastMarker = "dre_eastExtractionZoneMarker";
@@ -20,6 +32,10 @@ namespace Mission.Shared.Classes
 			_self.ExtractionZoneWestMarker = "dre_westExtractionZoneMarker";
 		};
 		
+		// Players
+		public property EditorPlayers Players { get; private set; };
+		
+		// Extraction zones
 		public property String ExtractionZoneNorthMarker { get; private set; };
 		public property String ExtractionZoneEastMarker { get; private set; };
 		public property String ExtractionZoneSouthMarker { get; private set; };
