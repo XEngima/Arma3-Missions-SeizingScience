@@ -1,0 +1,30 @@
+/*
+ * Name:	EditorVariables
+ * Date:	2017-07-03
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Contains all editor variables.
+ */
+namespace Mission.Shared.Classes
+{
+	public class EditorVariables
+	{
+		// Creates a EditorVariables object.
+		public constructor {
+			// Extraction zones
+			_self.ExtractionZoneNorthMarker = "dre_northExtractionZoneMarker";
+			_self.ExtractionZoneEastMarker = "dre_eastExtractionZoneMarker";
+			_self.ExtractionZoneSouthMarker = "dre_southExtractionZoneMarker";
+			_self.ExtractionZoneWestMarker = "dre_westExtractionZoneMarker";
+		};
+		
+		public property String ExtractionZoneNorthMarker { get; private set; };
+		public property String ExtractionZoneEastMarker { get; private set; };
+		public property String ExtractionZoneSouthMarker { get; private set; };
+		public property String ExtractionZoneWestMarker { get; private set; };
+	};
+	
+	gEditorVar = new EditorVariables;
+};

@@ -1,0 +1,31 @@
+/*
+ * Name:	ExtractionZone
+ * Date:	2017-07-03
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Models an extraction zone.
+ */
+using Mission.Shared.Enums;
+ 
+namespace Mission.Shared.Classes
+{
+	public class ExtractionZone
+	{
+		public static method Array GetPos {
+			params ["_extractionZone" as ExtractionZoneEnum];
+			private ["_pos" as Array];
+			
+			_pos = [];
+			
+			switch (_extractionZone) do {
+				case ExtractionZoneEnum.North: {
+					getMarkerPos "dre_northExtractionZone";
+				};
+			};
+			
+			_pos
+		};
+	};
+};

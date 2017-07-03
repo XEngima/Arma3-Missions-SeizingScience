@@ -1,0 +1,95 @@
+/*
+ * Name:	EventHandler
+ * Date:	2017-06-29
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Models event handling for custom events.
+ */
+namespace Sqx.Events
+{
+	public class EventListener
+	{
+		private fields ["_mEvents" as Array];
+	
+		// Creates an EventHandler object.
+		// _name (String): Name of the event listener. Must be unique for the event handler to be
+		//                 able to raise the events on all machines in multiplayer.
+		public constructor {
+			params ["_name" as String];
+			
+			_self.Name = _name;
+			_mEvents = [];
+			
+			[_self] call EventListener.RegisterEventListenerForMultiplayer;
+		};
+		
+		// Gets the name of the event handler.
+		public property String Name { get; private set; };
+		
+		// Adds an event to the event listener.
+		// _name (String):    The name (go code) of the event.
+		// _function (Code):  The function to be executed when event is raised.
+		// _parameter1 (Any): Optional. A parameter that is sent to the function.
+		// _parameter2 (Any): Optional. A second parameter that is sent to the function.
+		public method AddEvent {
+			params ["_eventName" as String, "_function", ["_parameter1" as Any, 0], ["_parameter2" as Any, 0]];
+			_mEvents pushBack [_eventName, _function, _parameter1, _parameter2] new Event;
+		};
+		
+		// Raises an event.
+		// _eventName (String): The name (go code) of the event.
+		public method RaiseEvent {
+			params ["_eventName" as String, ["_broadcast" as Boolean, true]];
+			
+			if (_broadcast) then {
+				Engima_Events_EventListener_RaiseEventEventArgs = [_self.Name, _eventName] new MpEventArg;
+				publicVariable "Engima_Events_EventListener_RaiseEventEventArgs";
+			};
+			
+			{
+				if (_x.Name == _eventName) then {
+					[_x.Parameter1, _x.Parameter2] spawn _x.Function;
+				};
+			} foreach _mEvents as Event;
+		};
+		
+		// Registers an event listener for multiplayer use.
+		private static method RegisterEventListenerForMultiplayer {
+			params ["_eventListener" as EventListener];
+			
+			if (isNil "Engima_Events_EventListener_registeredEventListeners") then {
+				Engima_Events_EventListener_registeredEventListeners = [];
+			};
+			
+			Engima_Events_EventListener_registeredEventListeners pushBack _eventListener;
+		};
+		
+		// Raises an event for a particular event listener
+		// _eventHandlerName (String): Name of the eventhandler to fire event upon.
+		// _eventName (String):        Name of the event to fire.
+		public static method RaiseEventStatic {
+			params ["_eventHandlerName" as String, "_eventName" as String, ["_broadcast" as Boolean, true]];
+			
+			{
+				if (_x.Name == _eventHandlerName) then {
+					[_eventName, _broadcast] call _x.RaiseEvent;
+				};
+			} foreach Engima_Events_EventListener_registeredEventListeners as EventListener;
+		};
+	};
+	
+	#region Multiplayer Mechanics
+	
+	// Old fashioned eventhandler that handles the event that are raised on another machine.
+	"Engima_Events_EventListener_RaiseEventEventArgs" addPublicVariableEventHandler {
+		params ["_eventArgs" as MpEventArg];
+		
+		[_eventArgs.EventListenerName, _eventArgs.EventName, false] call EventListener.RaiseEventStatic;
+		Engima_Events_EventListener_RaiseEventEventArgs = classNull;
+	};
+	
+	#endregion
+	
+};

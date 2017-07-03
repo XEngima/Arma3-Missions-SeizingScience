@@ -1,0 +1,81 @@
+/*
+ * Name:	AiRescueChopperPilot
+ * Date:	2017-06-28
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Models an AI rescue chopper pilot.
+ */
+ 
+using Mission.Shared.Classes;
+using Mission.Shared.Enums;
+ 
+namespace Mission.Server.Classes
+{
+	public class AiRescueChopperPilot : IRescueChopperPilot
+	{
+		private fields ["_mPilotObj" as Object, "_mChopperObj" as Object];
+	
+		// Creates an AiRescueChopperPilot object.
+		// _pilotObj:   The pilot unit.
+		// _chopperObj: The helicopter unit.
+		public constructor {
+			params ["_pilotObj" as Object, "_chopperObj" as Object];
+			
+			_mPilotObj = _pilotObj;
+			_mChopperObj = _chopperObj;
+			
+			_self.IsBusy = false;
+		};
+		
+		public property Boolean IsBusy { get; private set; };
+		
+		private method DoBoardChopper {
+			_mPilotObj assignAsDriver _mChopperObj;
+			[_mPilotObj] orderGetIn true;
+			
+			waitUntil { vehicle _mPilotObj == _mChopperObj };
+			_self.IsBusy = false;
+		};
+		
+		// Orders the pilot to board the chopper.
+		public method BoardChopper {
+			_self.IsBusy = true;
+			[] spawn _self.DoBoardChopper;
+		};
+	
+		// Moves the rescue chopper to the waiting zone outside the target area.
+		private method DoMoveToWaitingPoint {
+			(group _mPilotObj) addWaypoint [getMarkerPos "dre_rescueChopperWaitMarker", 0];
+			
+			waitUntil { _mChopperObj distance2D (getMarkerPos "dre_rescueChopperWaitMarker") < 100 };
+			_self.IsBusy = false;
+		};
+		
+		// Moves the rescue chopper to the waiting zone outside the target area.
+		public method MoveToWaitingPoint {
+			_self.IsBusy = true;
+			[] spawn _self.DoMoveToWaitingPoint;
+		};
+		
+		// Moves the rescue chopper to the extraction zone.
+		public method DoLandAtExtractionZone {
+			params ["_extractionZone" as ExtractionZoneEnum];
+			
+			
+		};
+		
+		// Moves the rescue chopper to the extraction zone.
+		public method LandAtExtractionZone {
+			params ["_extractionZone" as ExtractionZoneEnum];
+		
+			_self.IsBusy = true;
+			[] spawn _self.DoLandAtExtractionZone;
+		};
+		
+		// Orders the rescue chopper to return to base.
+		public method ReturnToBase {
+		};
+	};
+};

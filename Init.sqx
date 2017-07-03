@@ -1,0 +1,12 @@
+// Initialize content shared by server and all clients.
+execVM "Shared\InitShared.sqx";
+
+// Initialize content for the server.
+if (!isDedicated) then {
+	execVM "Server\InitServer.sqx";
+};
+
+// Initialize content for all clients.
+if (isServer) then {
+	execVM "Client\InitClient.sqx";
+};

@@ -1,0 +1,39 @@
+/*
+ * Name:	MissionEngine
+ * Date:	2017-06-27
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Handles mission control.
+ */
+
+using Mission.Shared.Classes;
+using Mission.Shared.Enums;
+
+namespace Mission.Server.Classes
+{
+	public class MissionEngine
+	{
+		private fields ["_mRescueChopperPilot" as IRescueChopperPilot];
+	
+		// Creates a MissionEngine object.
+		public constructor {
+			params ["_rescueChopperObj" as Object, "_rescueChopperPilotObj" as Object];
+			
+			_mRescueChopperPilot = [_rescueChopperPilotObj, _rescueChopperObj] new AiRescueChopperPilot;
+		};
+		
+		public method StartMission {
+			call _mRescueChopperPilot.BoardChopper;
+			player sideChat "boarding";
+			waitUntil { !_mRescueChopperPilot.IsBusy };
+			
+			call _mRescueChopperPilot.MoveToWaitingPoint;
+			player sideChat "moving";
+			waitUntil { !_mRescueChopperPilot.IsBusy };
+			
+			[ExtractionZoneEnum.North] call _mRescueChopperPilot.LandAtExtractionZone;
+		};
+	};
+};

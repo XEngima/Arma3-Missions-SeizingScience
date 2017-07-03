@@ -1,0 +1,28 @@
+/*
+ * Name:	MpEventArg
+ * Date:	2017-06-29
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Sent between machines when events are raised, and contains information on which event to fire.
+ */
+namespace Sqx.Events
+{
+	public class MpEventArg
+	{
+		// Creates a MpEventArg object.
+		public constructor {
+			params ["_eventListenerName" as String, "_eventName" as String];
+			
+			_self.EventListenerName = _eventListenerName;
+			_self.EventName = _eventName;
+		};
+		
+		// Gets the name of the event listener.
+		public property String EventListenerName { get; private set; };
+		
+		// Gets the name of the event to fire.
+		public property String EventName { get; private set; };
+	};
+};

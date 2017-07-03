@@ -1,0 +1,10 @@
+// Include (compile) the server classes
+call compile preprocessFile "Server\Classes\AiRescueChopperPilot.sqx";
+call compile preprocessFile "Server\Classes\MissionEngine.sqx";
+
+using Mission.Server.Classes;
+
+private "_missionEngine" as MissionEngine;
+
+_missionEngine = [dre_rescueChopper, dre_rescueChopperPilot] new MissionEngine;
+call _missionEngine.StartMission;
