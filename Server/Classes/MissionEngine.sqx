@@ -19,7 +19,21 @@ namespace Mission.Server.Classes
 	
 		// Creates a MissionEngine object.
 		public constructor {
-			params ["_rescueChopperObj" as Object, "_rescueChopperPilotObj" as Object];
+			params [
+				"_rescueChopperObj" as Object,
+				"_rescueChopperPilotObj" as Object,
+				"_pickUpNorthPos" as Array,
+				"_pickUpEastPos" as Array,
+				"_pickUpSouthPos" as Array,
+				"_pickUpWestPos" as Array
+			];
+			
+			[[ExtractionPoint.North, _pickUpNorthPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
+			[[ExtractionPoint.East, _pickUpEastPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
+			[[ExtractionPoint.South, _pickUpSouthPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
+			[[ExtractionPoint.West, _pickUpWestPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
+			
+			call gExtractionZoneHandler.CreateHelipads;
 			
 			_mRescueChopperPilot = [_rescueChopperPilotObj, _rescueChopperObj] new AiRescueChopperPilot;
 		};
@@ -33,7 +47,7 @@ namespace Mission.Server.Classes
 			player sideChat "moving";
 			waitUntil { !_mRescueChopperPilot.IsBusy };
 			
-			[ExtractionZoneEnum.North] call _mRescueChopperPilot.LandAtExtractionZone;
+			[ExtractionPoint.West] call _mRescueChopperPilot.LandAtExtractionZone;
 		};
 	};
 };

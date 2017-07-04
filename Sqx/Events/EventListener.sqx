@@ -22,7 +22,7 @@ namespace Sqx.Events
 			_self.Name = _name;
 			_mEvents = [];
 			
-			[_self] call EventListener.RegisterEventListenerForMultiplayer;
+			[_self] call _self.RegisterEventListenerForMultiplayer;
 		};
 		
 		// Gets the name of the event handler.
