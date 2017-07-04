@@ -1,0 +1,19 @@
+/*
+ * Name:	ExtractionZoneEnum
+ * Date:	2017-06-29
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Contains enum values for all extraction zones.
+ */
+namespace Mission.Shared.Enums
+{
+	public enum ExtractionPoint
+	{
+		North,
+		South,
+		East,
+		West,
+	};
+};
