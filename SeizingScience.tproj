@@ -12,10 +12,10 @@
           </ProjectNodeViewModel>
         </SubNodes>
       </ProjectNodeViewModel>
-      <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Server" IsExpanded="true" FileName="Server">
+      <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Server" IsExpanded="false" FileName="Server">
         <IsSelected>false</IsSelected>
         <SubNodes>
-          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Classes" IsExpanded="true" FileName="Server\Classes">
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Classes" IsExpanded="false" FileName="Server\Classes">
             <IsSelected>false</IsSelected>
             <SubNodes>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="AiRescueChopperPilot.sqx" IsExpanded="false" FileName="Server\Classes\AiRescueChopperPilot.sqx">
@@ -34,27 +34,27 @@
           </ProjectNodeViewModel>
         </SubNodes>
       </ProjectNodeViewModel>
-      <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Shared" IsExpanded="true" FileName="Shared">
+      <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Shared" IsExpanded="false" FileName="Shared">
         <IsSelected>false</IsSelected>
         <SubNodes>
-          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Classes" IsExpanded="true" FileName="Shared\Classes">
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Classes" IsExpanded="false" FileName="Shared\Classes">
             <IsSelected>false</IsSelected>
             <SubNodes>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="EditorVariables.sqx" IsExpanded="false" FileName="Shared\Classes\EditorVariables.sqx">
-                <IsSelected>true</IsSelected>
+                <IsSelected>false</IsSelected>
                 <SubNodes />
               </ProjectNodeViewModel>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="ExtractionZone.sqx" IsExpanded="false" FileName="Shared\Classes\ExtractionZone.sqx">
                 <IsSelected>false</IsSelected>
                 <SubNodes />
               </ProjectNodeViewModel>
-              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="IRescueChopperPilot.sqx" IsExpanded="true" FileName="Shared\Classes\IRescueChopperPilot.sqx">
+              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="IRescueChopperPilot.sqx" IsExpanded="false" FileName="Shared\Classes\IRescueChopperPilot.sqx">
                 <IsSelected>false</IsSelected>
                 <SubNodes />
               </ProjectNodeViewModel>
             </SubNodes>
           </ProjectNodeViewModel>
-          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Enums" IsExpanded="true" FileName="Shared\Enums">
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Enums" IsExpanded="false" FileName="Shared\Enums">
             <IsSelected>false</IsSelected>
             <SubNodes>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="ExtractionZoneEnum.sqx" IsExpanded="false" FileName="Shared\Enums\ExtractionZoneEnum.sqx">
@@ -69,10 +69,10 @@
           </ProjectNodeViewModel>
         </SubNodes>
       </ProjectNodeViewModel>
-      <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Sqx" IsExpanded="true" FileName="Sqx">
+      <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Sqx" IsExpanded="false" FileName="Sqx">
         <IsSelected>false</IsSelected>
         <SubNodes>
-          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Events" IsExpanded="true" FileName="Sqx\Events">
+          <ProjectNodeViewModel xsi:type="ProjectFolderNodeViewModel" Name="Events" IsExpanded="false" FileName="Sqx\Events">
             <IsSelected>false</IsSelected>
             <SubNodes>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="Event.sqx" IsExpanded="false" FileName="Sqx\Events\Event.sqx">
@@ -99,10 +99,11 @@
         <IsSelected>false</IsSelected>
         <SubNodes />
       </ProjectNodeViewModel>
+      <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="test.sqx" IsExpanded="false" FileName="test.sqx">
+        <IsSelected>true</IsSelected>
+        <SubNodes />
+      </ProjectNodeViewModel>
     </SubNodes>
   </ProjectRootNode>
-  <FilteredAnalyzerResultItems>
-    <string>Public variable 'dre_rescueChopper' may be used before being assigned a value.</string>
-    <string>Public variable 'dre_rescueChopperPilot' may be used before being assigned a value.</string>
-  </FilteredAnalyzerResultItems>
+  <FilteredAnalyzerResultItems />
 </Project>

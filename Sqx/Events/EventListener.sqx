@@ -80,7 +80,7 @@ namespace Sqx.Events
 		};
 	};
 	
-	#region Multiplayer Mechanics
+	#region Global Multiplayer Mechanics
 	
 	// Old fashioned eventhandler that handles the event that are raised on another machine.
 	"Engima_Events_EventListener_RaiseEventEventArgs" addPublicVariableEventHandler {

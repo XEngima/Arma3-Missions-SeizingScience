@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=11;
+		nextID=12;
 	};
 	class MarkerIDProvider
 	{
@@ -28,13 +28,14 @@ addons[]=
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Air_F_Beta_Heli_Transport_01",
 	"A3_Characters_F",
-	"A3_Ui_F"
+	"A3_Ui_F",
+	"A3_Soft_F_Gamma_Truck_01"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=4;
+		items=5;
 		class Item0
 		{
 			className="A3_Structures_F_Mil";
@@ -60,6 +61,13 @@ class AddonsMetaData
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item4
+		{
+			className="A3_Soft_F_Gamma";
+			name="Arma 3 - Unarmored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -94,14 +102,14 @@ class Mission
 	};
 	class Entities
 	{
-		items=5;
+		items=6;
 		class Item0
 		{
 			dataType="Object";
 			class PositionInfo
 			{
 				position[]={11807.253,7.25,13143.479};
-				angles[]={-0,0.27842629,0};
+				angles[]={0,0.27842629,0};
 			};
 			side="Empty";
 			flags=4;
@@ -240,6 +248,23 @@ class Mission
 			type="mil_circle";
 			id=10;
 			atlOffset=20.556789;
+		};
+		class Item5
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={11804.168,8.6325922,13210.021};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="dre_testVariable3";
+			};
+			id=11;
+			type="B_Truck_01_mover_F";
+			atlOffset=0.00047922134;
 		};
 	};
 };

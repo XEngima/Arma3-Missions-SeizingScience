@@ -19,7 +19,7 @@ namespace Mission.Shared.Classes
 	};
 
 	public class EditorVariables
-	{	
+	{
 		// Creates a EditorVariables object.
 		public constructor {
 			// Players
