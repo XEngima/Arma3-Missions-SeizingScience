@@ -47,9 +47,9 @@ namespace Mission.Server.Classes
 	
 		// Moves the rescue chopper to the waiting zone outside the target area.
 		private method DoMoveToWaitingPoint {
-			(group _mPilotObj) addWaypoint [getMarkerPos "dre_rescueChopperWaitMarker", 0];
+			(group _mPilotObj) addWaypoint [getMarkerPos "eng_rescueChopperWaitMarker", 0];
 			
-			waitUntil { _mChopperObj distance2D (getMarkerPos "dre_rescueChopperWaitMarker") < 100 };
+			waitUntil { _mChopperObj distance2D (getMarkerPos "eng_rescueChopperWaitMarker") < 100 };
 			_self.IsBusy = false;
 		};
 		
@@ -61,17 +61,26 @@ namespace Mission.Server.Classes
 		
 		// Moves the rescue chopper to the extraction zone.
 		public method DoLandAtExtractionZone {
-			params ["_extractionZone" as ExtractionZoneEnum];
+			params ["_point" as ExtractionPoint];
+			private ["_zone" as ExtractionZone];
 			
+			_zone = [_point] call gExtractionZoneHandler.GetZone;
 			
+			(group _mPilotObj) addWaypoint [_zone.Position, 0];
+			waitUntil { _mChopperObj distance2D (_zone.Position) < 100 };
+			
+			_mChopperObj land "LAND";
+			waitUntil { (getPosATL _mChopperObj) select 2 < 2 };
+			
+			_self.IsBusy = false;
 		};
 		
 		// Moves the rescue chopper to the extraction zone.
 		public method LandAtExtractionZone {
-			params ["_extractionZone" as ExtractionZoneEnum];
+			params ["_point" as ExtractionPoint];
 		
 			_self.IsBusy = true;
-			[] spawn _self.DoLandAtExtractionZone;
+			[_point] spawn _self.DoLandAtExtractionZone;
 		};
 		
 		// Orders the rescue chopper to return to base.

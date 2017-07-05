@@ -9,7 +9,7 @@
  */
 namespace Mission.Shared.Enums
 {
-	public enum ExtractionZoneEnum
+	public enum ExtractionPoint
 	{
 		North,
 		South,

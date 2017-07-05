@@ -13,19 +13,20 @@ namespace Mission.Shared.Classes
 {
 	public class ExtractionZone
 	{
-		public static method Array GetPos {
-			params ["_extractionZone" as ExtractionZoneEnum];
-			private ["_pos" as Array];
+		// Creates an ExtractionZone object.
+		// _point (ExtractionPoint): The identification of the extraction zone.
+		// _position (Array):        The actual position where to spawn the invisible helipad.
+		public constructor {
+			params ["_point" as ExtractionPoint, "_position" as Array];
 			
-			_pos = [];
-			
-			switch (_extractionZone) do {
-				case ExtractionZoneEnum.North: {
-					getMarkerPos "dre_northExtractionZone";
-				};
-			};
-			
-			_pos
+			_self.Point = _point;
+			_self.Position = _position;
 		};
+		
+		// Gets the identification of the extraction zone.
+		public property ExtractionPoint Point { get; private set; };
+		
+		// Gets the zone's position.
+		public property Position { get; private set; };
 	};
 };

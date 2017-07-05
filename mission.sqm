@@ -8,18 +8,18 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=12;
+		nextID=16;
 	};
 	class MarkerIDProvider
 	{
-		nextID=1;
+		nextID=2;
 	};
 	class Camera
 	{
-		pos[]={11758.164,38.237076,13170.57};
-		dir[]={0.65018278,-0.22205441,0.726686};
-		up[]={0.14810175,0.9750213,0.16552937};
-		aside[]={0.74528772,-1.4419056e-006,-0.66682988};
+		pos[]={13208.633,20.907335,13697.362};
+		dir[]={0.18326308,-0.72056192,0.66882747};
+		up[]={0.19042088,0.69338042,0.69495177};
+		aside[]={0.96450758,6.6203938e-008,-0.26428029};
 	};
 };
 binarizationWanted=0;
@@ -28,14 +28,13 @@ addons[]=
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Air_F_Beta_Heli_Transport_01",
 	"A3_Characters_F",
-	"A3_Ui_F",
-	"A3_Soft_F_Gamma_Truck_01"
+	"A3_Ui_F"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=5;
+		items=4;
 		class Item0
 		{
 			className="A3_Structures_F_Mil";
@@ -61,13 +60,6 @@ class AddonsMetaData
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item4
-		{
-			className="A3_Soft_F_Gamma";
-			name="Arma 3 - Unarmored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -102,7 +94,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=6;
+		items=9;
 		class Item0
 		{
 			dataType="Object";
@@ -244,27 +236,46 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={12099.489,0,13622.234};
-			name="dre_rescueChopperWaitMarker";
+			name="eng_rescueChopperWaitMarker";
 			type="mil_circle";
 			id=10;
 			atlOffset=20.556789;
 		};
 		class Item5
 		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={11804.168,8.6325922,13210.021};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-				name="dre_testVariable3";
-			};
+			dataType="Marker";
+			position[]={12054.346,0,14195.003};
+			name="eng_pickUpMarkerWest";
+			type="mil_pickup";
 			id=11;
-			type="B_Truck_01_mover_F";
-			atlOffset=0.00047922134;
+			atlOffset=-20.527163;
+		};
+		class Item6
+		{
+			dataType="Marker";
+			position[]={12348.46,-2.0053711,13906.243};
+			name="eng_pickUpMarkerSouth";
+			type="mil_pickup";
+			id=12;
+			atlOffset=-3.3399365;
+		};
+		class Item7
+		{
+			dataType="Marker";
+			position[]={12796.893,0,14389.144};
+			name="eng_pickUpMarkerNorth";
+			type="mil_pickup";
+			id=13;
+			atlOffset=-1.568369;
+		};
+		class Item8
+		{
+			dataType="Marker";
+			position[]={13209.612,0,13710.016};
+			name="eng_pickUpMarkerEast";
+			type="mil_pickup";
+			id=14;
+			atlOffset=-0.97270018;
 		};
 	};
 };
