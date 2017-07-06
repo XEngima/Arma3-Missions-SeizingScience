@@ -34,10 +34,19 @@ namespace Mission.Server.Types
 			[] spawn _self.RunSimulation;
 		};
 		
+		// Deletes all waypoints for the chopper's group.
+		private method DeleteAllWaypoints {
+			{
+				deleteWaypoint [group _mPilotObj, 0];
+			} foreach waypoints group _mPilotObj;
+		};
+		
 		public property Boolean IsBusy { get; private set; };
 		
 		private method SetState {
 			params ["_state" as RescueChopperState];
+			
+			call _self.DeleteAllWaypoints;
 			
 			_mState = _state;
 			_mStateIsNew = true;
@@ -45,6 +54,10 @@ namespace Mission.Server.Types
 		
 		// Starts the simulation, i.e. gets the AI pilot to respond to given actions.
 		private method RunSimulation {
+			private ["_isLanding" as Boolean];
+			
+			_isLanding = false;
+		
 			while { alive _mPilotObj && canMove _mChopperObj } do
 			{
 				if (_mState == RescueChopperState.MovingOut) then
@@ -53,7 +66,7 @@ namespace Mission.Server.Types
 						(group _mPilotObj) addWaypoint [_mWaitingPos, 0];
 					};
 					
-					if (_mChopperObj distance2D _mWaitingPos < 100) then {
+					if (_mChopperObj distance2D _mWaitingPos < 150) then {
 						_mState = RescueChopperState.Idle;
 						_self.IsBusy = false;
 					};
@@ -62,13 +75,15 @@ namespace Mission.Server.Types
 				if (_mState == RescueChopperState.MovingToExtractionZone) then {
 					if (_mStateIsNew) then {
 						(group _mPilotObj) addWaypoint [_mExtractionPos, 0];
+						_isLanding = false;
 					};
 				
-					if (_mChopperObj distance2D (_mExtractionPos) < 100 ) then {
+					if (_mChopperObj distance2D (_mExtractionPos) < 150 && !_isLanding) then {
+						_isLanding = true;
 						_mChopperObj land "LAND";
 					};
 					
-					if ((getPosATL _mChopperObj) select 2 < 2) then {
+					if ((getPosATL _mChopperObj) select 2 < 2 && _isLanding) then {
 						_mState = RescueChopperState.Idle;
 						_self.IsBusy = false;
 					};
@@ -92,14 +107,6 @@ namespace Mission.Server.Types
 			_self.IsBusy = true;
 			[] spawn _self.DoBoardChopper;
 		};
-	
-		// Moves the rescue chopper to the waiting zone outside the target area.
-		private method DoMoveToWaitingPoint {
-			(group _mPilotObj) addWaypoint [getMarkerPos "eng_rescueChopperWaitMarker", 0];
-			
-			waitUntil { _mChopperObj distance2D (getMarkerPos "eng_rescueChopperWaitMarker") < 100 };
-			_self.IsBusy = false;
-		};
 		
 		// Moves the rescue chopper to the waiting zone outside the target area.
 		public method MoveToWaitingPoint {
@@ -108,7 +115,7 @@ namespace Mission.Server.Types
 		};
 		
 		// Moves the rescue chopper to the extraction zone.
-		public method DoLandAtExtractionZone {
+		public method LandAtExtractionZone {
 			params ["_point" as ExtractionPoint];
 			private ["_zone" as ExtractionZone];
 			
@@ -116,14 +123,6 @@ namespace Mission.Server.Types
 			
 			_mExtractionPos = _zone.Position;
 			[RescueChopperState.MovingToExtractionZone] call _self.SetState;
-		};
-		
-		// Moves the rescue chopper to the extraction zone.
-		public method LandAtExtractionZone {
-			params ["_point" as ExtractionPoint];
-		
-			_self.IsBusy = true;
-			[_point] spawn _self.DoLandAtExtractionZone;
 		};
 		
 		// Orders the rescue chopper to return to base.

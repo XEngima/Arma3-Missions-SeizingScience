@@ -52,7 +52,12 @@ namespace Mission.Server.Types
 			player sideChat "moving";
 			waitUntil { !_mRescueChopperPilot.IsBusy };
 			
-			[ExtractionPoint.West] call _mRescueChopperPilot.LandAtExtractionZone;
+			[ExtractionPoint.East] call _mRescueChopperPilot.LandAtExtractionZone;
+			
+			sleep 5;
+			
+			hint "now";
+			[ExtractionPoint.South] call _mRescueChopperPilot.LandAtExtractionZone;
 		};
 	};
 };
