@@ -2,7 +2,7 @@
 call compile preprocessFileLineNumbers "Server\Classes\AiRescueChopperPilot.sqx";
 call compile preprocessFileLineNumbers "Server\Classes\MissionEngine.sqx";
 
-using Mission.Server.Classes;
+using Mission.Server.Types;
 
 private "_missionEngine" as MissionEngine;
 
