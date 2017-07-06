@@ -25,7 +25,8 @@ namespace Mission.Server.Classes
 				"_pickUpNorthPos" as Array,
 				"_pickUpEastPos" as Array,
 				"_pickUpSouthPos" as Array,
-				"_pickUpWestPos" as Array
+				"_pickUpWestPos" as Array,
+				"_rescueChopperWaitingPos" as Array
 			];
 			
 			[[ExtractionPoint.North, _pickUpNorthPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
@@ -35,7 +36,11 @@ namespace Mission.Server.Classes
 			
 			call gExtractionZoneHandler.CreateHelipads;
 			
-			_mRescueChopperPilot = [_rescueChopperPilotObj, _rescueChopperObj] new AiRescueChopperPilot;
+			_mRescueChopperPilot = [
+				_rescueChopperPilotObj, 
+				_rescueChopperObj, 
+				_rescueChopperWaitingPos
+			] new AiRescueChopperPilot;
 		};
 		
 		public method StartMission {
