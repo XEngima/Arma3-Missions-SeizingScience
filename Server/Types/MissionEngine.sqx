@@ -1,0 +1,58 @@
+/*
+ * Name:	MissionEngine
+ * Date:	2017-06-27
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Handles mission control.
+ */
+
+using Mission.Server.Types;
+using Mission.Shared.Types;
+
+namespace Mission.Server.Types
+{
+	public class MissionEngine
+	{
+		private fields ["_mRescueChopperPilot" as IRescueChopperPilot];
+	
+		// Creates a MissionEngine object.
+		public constructor {
+			params [
+				"_rescueChopperObj" as Object,
+				"_rescueChopperPilotObj" as Object,
+				"_pickUpNorthPos" as Array,
+				"_pickUpEastPos" as Array,
+				"_pickUpSouthPos" as Array,
+				"_pickUpWestPos" as Array,
+				"_rescueChopperWaitingPos" as Array
+			];
+			
+			[[ExtractionPoint.North, _pickUpNorthPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
+			[[ExtractionPoint.East, _pickUpEastPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
+			[[ExtractionPoint.South, _pickUpSouthPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
+			[[ExtractionPoint.West, _pickUpWestPos] new ExtractionZone] call gExtractionZoneHandler.AddZone;
+			
+			call gExtractionZoneHandler.CreateHelipads;
+			
+			_mRescueChopperPilot = [
+				_rescueChopperPilotObj, 
+				_rescueChopperObj, 
+				_rescueChopperWaitingPos
+			] new AiRescueChopperPilot;
+		};
+		
+		public method StartMission {
+			call _mRescueChopperPilot.BoardChopper;
+			player sideChat "boarding";
+			waitUntil { !_mRescueChopperPilot.IsBusy };
+			
+			call _mRescueChopperPilot.MoveToWaitingPoint;
+			player sideChat "moving";
+			waitUntil { !_mRescueChopperPilot.IsBusy };
+			
+			[ExtractionPoint.West] call _mRescueChopperPilot.LandAtExtractionZone;
+		};
+	};
+};

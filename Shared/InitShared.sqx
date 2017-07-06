@@ -1,3 +1,3 @@
-call compile preprocessFileLineNumbers "Shared\Enums\ExtractionPoint.sqx";
-call compile preprocessFileLineNumbers "Shared\Classes\ExtractionZone.sqx";
-call compile preprocessFileLineNumbers "Shared\Classes\ExtractionZoneHandler.sqx";
+call compile preprocessFileLineNumbers "Shared\Types\ExtractionPoint.sqx";
+call compile preprocessFileLineNumbers "Shared\Types\ExtractionZone.sqx";
+call compile preprocessFileLineNumbers "Shared\Types\ExtractionZoneHandler.sqx";

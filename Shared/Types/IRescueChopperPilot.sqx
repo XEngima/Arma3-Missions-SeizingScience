@@ -1,0 +1,30 @@
+/*
+ * Name:	IRescueChopperPilot
+ * Date:	2017-06-27
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Describes a rescue chopper pilot.
+ */
+namespace Mission.Shared.Types
+{
+	public interface IRescueChopperPilot
+	{
+		// Gets whether an order is currently being carried out or not.
+		property Boolean IsBusy { get; };
+	
+		// Orders the pilot to board the chopper.
+		method BoardChopper;
+	
+		// Moves the rescue chopper to the waiting zone outside the target area.
+		method MoveToWaitingPoint;
+		
+		// Moves to and lands at the extraction zone.
+		// _extractionZone (ExtractionZoneEnum): The extraction zone to land at.
+		method LandAtExtractionZone;
+		
+		// Orders the rescue chopper to return to base.
+		method ReturnToBase;
+	};
+};

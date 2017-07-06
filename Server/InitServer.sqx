@@ -1,6 +1,6 @@
 // Include (compile) the server classes
-call compile preprocessFileLineNumbers "Server\Classes\AiRescueChopperPilot.sqx";
-call compile preprocessFileLineNumbers "Server\Classes\MissionEngine.sqx";
+call compile preprocessFileLineNumbers "Server\Types\AiRescueChopperPilot.sqx";
+call compile preprocessFileLineNumbers "Server\Types\MissionEngine.sqx";
 
 using Mission.Server.Types;
 
