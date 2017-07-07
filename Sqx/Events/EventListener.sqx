@@ -39,19 +39,18 @@ namespace Sqx.Events
 		// Raises an event.
 		// _eventName (String): The name (go code) of the event.
 		// _parameter1 (Any): Optional. A parameter that is sent to the function. Default 0.
-		// _parameter2 (Any): Optional. A second parameter that is sent to the function. Default 0.
 		// _broadcast (Boolean): Optional. Whether the event should fire on all machines or not. Default true.
 		public method RaiseEvent {
-			params ["_eventId" as Any, ["_parameter1" as Any, 0], ["_parameter2" as Any, 0], ["_broadcast" as Boolean, true]];
+			params ["_eventId" as Any, ["_parameter" as Any, 0], ["_broadcast" as Boolean, true]];
 			
 			if (_broadcast) then {
-				Engima_Events_EventListener_RaiseEventEventArgs = [_self.Name, _eventId] new MpEventArg;
+				Engima_Events_EventListener_RaiseEventEventArgs = [_self.Name, _eventId, _parameter] new MpEventArg;
 				publicVariable "Engima_Events_EventListener_RaiseEventEventArgs";
 			};
 			
 			{
 				if (_x.Id == _eventId) then {
-					[_x.Owner, [_parameter1, _parameter2]] spawn _x.Function;
+					[_x.Owner, _parameter] spawn _x.Function;
 				};
 			} foreach _mEvents as Event;
 		};
@@ -71,11 +70,11 @@ namespace Sqx.Events
 		// _eventHandlerName (String): Name of the eventhandler to fire event upon.
 		// _eventName (String):        Name of the event to fire.
 		public static method RaiseEventStatic {
-			params ["_eventHandlerName" as String, "_eventName" as String, ["_broadcast" as Boolean, true]];
+			params ["_eventHandlerName" as String, "_eventId" as Any, ["_parameter" as Any, 0], ["_broadcast" as Boolean, true]];
 			
 			{
 				if (_x.Name == _eventHandlerName) then {
-					[_eventName, _broadcast] call _x.RaiseEvent;
+					[_eventId, _broadcast, _parameter] call _x.RaiseEvent;
 				};
 			} foreach Engima_Events_EventListener_registeredEventListeners as EventListener;
 		};
@@ -87,7 +86,7 @@ namespace Sqx.Events
 	"Engima_Events_EventListener_RaiseEventEventArgs" addPublicVariableEventHandler {
 		params ["_eventArgs" as MpEventArg];
 		
-		[_eventArgs.EventListenerName, _eventArgs.EventName, false] call EventListener.RaiseEventStatic;
+		[_eventArgs.EventListenerName, _eventArgs.EventName, _eventArgs.Parameter, false] call EventListener.RaiseEventStatic;
 		Engima_Events_EventListener_RaiseEventEventArgs = classNull;
 	};
 	

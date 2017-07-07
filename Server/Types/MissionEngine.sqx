@@ -16,7 +16,7 @@ namespace Mission.Server.Types
 {
 	public class MissionEngine
 	{
-		private fields ["_mRescueChopperPilot" as IRescueChopperPilot];
+		private fields ["_mRadio" as EventListener, "_mRescueChopperPilot" as IRescueChopperPilot];
 	
 		// Creates a MissionEngine object.
 		public constructor {
@@ -38,12 +38,10 @@ namespace Mission.Server.Types
 			call gExtractionZoneHandler.CreateHelipads;
 			
 			// Create all units
-			private ["_radio" as EventListener];
-			
-			_radio = new EventListener;
+			_mRadio = new EventListener;
 			
 			_mRescueChopperPilot = [
-				_radio,
+				_mRadio,
 				_rescueChopperPilotObj, 
 				_rescueChopperObj, 
 				_rescueChopperWaitingPos
@@ -55,8 +53,10 @@ namespace Mission.Server.Types
 			player sideChat "boarding";
 			waitUntil { !_mRescueChopperPilot.IsBusy };
 			
-			call _mRescueChopperPilot.MoveToWaitingPoint;
-			player sideChat "moving";
+			[RadioCall.RescueChopperMoveOut] call _mRadio.RaiseEvent;
+			
+//			call _mRescueChopperPilot.MoveToWaitingPoint;
+//			player sideChat "moving";
 			waitUntil { !_mRescueChopperPilot.IsBusy };
 			
 			[ExtractionPoint.East] call _mRescueChopperPilot.LandAtExtractionZone;

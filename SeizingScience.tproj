@@ -22,10 +22,6 @@
                 <IsSelected>false</IsSelected>
                 <SubNodes />
               </ProjectNodeViewModel>
-              <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="AiRescueChopperPilot.sqx.sqf" IsExpanded="false" FileName="Server\Types\AiRescueChopperPilot.sqx.sqf">
-                <IsSelected>false</IsSelected>
-                <SubNodes />
-              </ProjectNodeViewModel>
               <ProjectNodeViewModel xsi:type="ProjectFileNodeViewModel" Name="MissionEngine.sqx" IsExpanded="false" FileName="Server\Types\MissionEngine.sqx">
                 <IsSelected>true</IsSelected>
                 <SubNodes />

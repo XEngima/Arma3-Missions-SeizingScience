@@ -13,10 +13,11 @@ namespace Sqx.Events
 	{
 		// Creates a MpEventArg object.
 		public constructor {
-			params ["_eventListenerName" as String, "_eventName" as String];
+			params ["_eventListenerName" as String, "_eventName" as String, "_parameter" as Any];
 			
 			_self.EventListenerName = _eventListenerName;
 			_self.EventName = _eventName;
+			_self.Parameter = _parameter;
 		};
 		
 		// Gets the name of the event listener.
@@ -24,5 +25,8 @@ namespace Sqx.Events
 		
 		// Gets the name of the event to fire.
 		public property String EventName { get; private set; };
+		
+		// Gets the parameter to inject into the function call.
+		public property Any Parameter { get; private set; };
 	};
 };
