@@ -1,0 +1,19 @@
+/*
+ * Name:	RadioCall
+ * Date:	2017-07-07
+ * Version: 1.0
+ * Author:  Engima
+ *
+ * Description:
+ * Enum containing all possible radio calls for the mission.
+ */
+namespace Mission.Shared.Types
+{
+	public enum RadioCall
+	{
+		RescueChopperMoveOut,
+		RescueChopperSetPickupPoint,
+		RescueChopperMoveIn,
+		RescueChopperReturnToBase,
+	};
+};

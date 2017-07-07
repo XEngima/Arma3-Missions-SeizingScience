@@ -13,20 +13,17 @@ namespace Sqx.Events
 	{
 		// Creates an Event object.
 		public constructor {
-			params ["_eventName" as String, "_function", ["_parameter1" as Any, 0], ["_parameter2" as Any, 0]];
+			params ["_eventId" as Any, "_function" as Code, "_owner" as Any];
 			
-			_self.Name = _eventName;
+			_self.Id = _eventId;
 			_self.Function = _function;
-			_self.Parameter1 = _parameter1;
-			_self.Parameter2 = _parameter2;
+			_self.Owner = _owner;
 		};
 		
-		public property String Name { get; private set; };
+		public property Any Id { get; private set; };
 
 		public property Code Function { get; private set; };
 
-		public property Any Parameter1 { get; private set; };
-
-		public property Any Parameter2 { get; private set; };
+		public property Any Owner { get; private set; };
 	};
 };

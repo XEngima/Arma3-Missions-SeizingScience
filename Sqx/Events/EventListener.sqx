@@ -31,26 +31,27 @@ namespace Sqx.Events
 		// Adds an event to the event listener.
 		// _name (String):    The name (go code) of the event.
 		// _function (Code):  The function to be executed when event is raised.
-		// _parameter1 (Any): Optional. A parameter that is sent to the function.
-		// _parameter2 (Any): Optional. A second parameter that is sent to the function.
 		public method AddEvent {
-			params ["_eventName" as String, "_function", ["_parameter1" as Any, 0], ["_parameter2" as Any, 0]];
-			_mEvents pushBack [_eventName, _function, _parameter1, _parameter2] new Event;
+			params ["_eventName" as String, "_function" as Code, "_owner" as Any];
+			_mEvents pushBack [_eventName, _function, _owner] new Event;
 		};
 		
 		// Raises an event.
 		// _eventName (String): The name (go code) of the event.
+		// _parameter1 (Any): Optional. A parameter that is sent to the function. Default 0.
+		// _parameter2 (Any): Optional. A second parameter that is sent to the function. Default 0.
+		// _broadcast (Boolean): Optional. Whether the event should fire on all machines or not. Default true.
 		public method RaiseEvent {
-			params ["_eventName" as String, ["_broadcast" as Boolean, true]];
+			params ["_eventId" as Any, ["_parameter1" as Any, 0], ["_parameter2" as Any, 0], ["_broadcast" as Boolean, true]];
 			
 			if (_broadcast) then {
-				Engima_Events_EventListener_RaiseEventEventArgs = [_self.Name, _eventName] new MpEventArg;
+				Engima_Events_EventListener_RaiseEventEventArgs = [_self.Name, _eventId] new MpEventArg;
 				publicVariable "Engima_Events_EventListener_RaiseEventEventArgs";
 			};
 			
 			{
-				if (_x.Name == _eventName) then {
-					[_x.Parameter1, _x.Parameter2] spawn _x.Function;
+				if (_x.Id == _eventId) then {
+					[_x.Owner, [_parameter1, _parameter2]] spawn _x.Function;
 				};
 			} foreach _mEvents as Event;
 		};

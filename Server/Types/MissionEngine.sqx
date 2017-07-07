@@ -8,6 +8,7 @@
  * Handles mission control.
  */
 
+using Sqx.Events;
 using Mission.Server.Types;
 using Mission.Shared.Types;
 
@@ -36,7 +37,13 @@ namespace Mission.Server.Types
 			
 			call gExtractionZoneHandler.CreateHelipads;
 			
+			// Create all units
+			private ["_radio" as EventListener];
+			
+			_radio = new EventListener;
+			
 			_mRescueChopperPilot = [
+				_radio,
 				_rescueChopperPilotObj, 
 				_rescueChopperObj, 
 				_rescueChopperWaitingPos
