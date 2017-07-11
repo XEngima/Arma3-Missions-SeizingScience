@@ -11,6 +11,7 @@ namespace Mission.Shared.Types
 {
 	public enum RadioCall
 	{
+		RescueChopperGetIn,
 		RescueChopperMoveOut,
 		RescueChopperSetPickupPoint,
 		RescueChopperMoveIn,

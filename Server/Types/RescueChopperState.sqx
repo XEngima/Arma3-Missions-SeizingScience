@@ -12,6 +12,7 @@ namespace Mission.Server.Types
 	public enum RescueChopperState
 	{
 		Idle,
+		GetIn,
 		MovingOut,
 		MovingToExtractionZone,
 		ReturningToBase,

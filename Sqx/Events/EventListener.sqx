@@ -31,7 +31,7 @@ namespace Sqx.Events
 		// Adds an event to the event listener.
 		// _name (String):    The name (go code) of the event.
 		// _function (Code):  The function to be executed when event is raised.
-		public method AddEvent {
+		public method RegisterEvent {
 			params ["_eventName" as String, "_function" as Code, "_owner" as Any];
 			_mEvents pushBack [_eventName, _function, _owner] new Event;
 		};
