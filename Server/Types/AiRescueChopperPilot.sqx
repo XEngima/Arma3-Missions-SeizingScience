@@ -24,7 +24,9 @@ namespace Mission.Server.Types
 		public constructor {
 			params ["_eventListener" as EventListener, "_pilotObj" as Object, "_chopperObj" as Object, "_waitingPos" as Array];
 			
-			if (_eventListener != classNull) then {
+			_mEventListener = _eventListener;
+			
+			if (!isNull _eventListener) then {
 				[RadioCall.RescueChopperMoveOut, _self.OnRadioMoveOut, _self] call _mEventListener.RegisterEvent;
 				[RadioCall.RescueChopperSetPickupPoint, _self.OnRadioSetPickupPoint, _self] call _mEventListener.RegisterEvent;
 			};
@@ -133,7 +135,8 @@ namespace Mission.Server.Types
 		// Orders the pilot to board the chopper.
 		public method BoardChopper {
 			_self.IsBusy = true;
-			[RescueChopperState.GetIn] call _self.SetState;
+			call _self.DoBoardChopper;
+			//[RescueChopperState.GetIn] call _self.SetState;
 		};
 		
 		// Moves the rescue chopper to the waiting zone outside the target area.

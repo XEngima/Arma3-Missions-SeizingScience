@@ -1,3 +1,4 @@
+call compile preprocessFileLineNumbers "Sqx\Events\EventListener.sqx";
 call compile preprocessFileLineNumbers "Shared\Types\ExtractionPoint.sqx";
 call compile preprocessFileLineNumbers "Shared\Types\ExtractionZone.sqx";
 call compile preprocessFileLineNumbers "Shared\Types\ExtractionZoneHandler.sqx";

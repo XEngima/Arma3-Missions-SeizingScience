@@ -32,9 +32,7 @@ namespace Mission.Shared.Types
 		// Returns: The matching extraction zone. classNull if the zone does not exist.
 		public method ExtractionZone GetZone {
 			params ["_point" as ExtractionPoint];
-			private ["_zone" as ExtractionZone];
-			
-			_zone = classNull;
+			private _zone = classNull as ExtractionZone;
 			
 			{
 				if (_x.Point == _point) then {

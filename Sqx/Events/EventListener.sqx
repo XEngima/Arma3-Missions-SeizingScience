@@ -1,3 +1,6 @@
+call compile preprocessFileLineNumbers "Sqx\Events\Event.sqx";
+call compile preprocessFileLineNumbers "Sqx\Events\MpEventArg.sqx";
+
 /*
  * Name:	EventHandler
  * Date:	2017-06-29
@@ -32,8 +35,9 @@ namespace Sqx.Events
 		// _name (String):    The name (go code) of the event.
 		// _function (Code):  The function to be executed when event is raised.
 		public method RegisterEvent {
-			params ["_eventName" as String, "_function" as Code, "_owner" as Any];
-			_mEvents pushBack [_eventName, _function, _owner] new Event;
+			params ["_eventId" as Scalar, "_function" as Code, "_owner" as Any];
+			//player sideChat str _owner;
+			_mEvents pushBack [_eventId, _function, 0] new Event;
 		};
 		
 		// Raises an event.
